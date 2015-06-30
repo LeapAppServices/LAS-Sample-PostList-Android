@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PostList</string>
+    <string name="title_activity_write_post">Compose Post</string>
+    <string name="title_activity_post_list">All Posts</string>
+    <string name="blog_post_label">Enter your blog post</string>
+    <string name="save_button_text">Save</string>
+    <string name="cancel_button_text">Cancel</string>
+    <string name="empty_list_view">No posts to display. Add one!</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_new">New Post</string>
+
+</resources>
