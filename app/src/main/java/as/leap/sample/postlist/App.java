@@ -4,7 +4,6 @@ import android.app.Application;
 
 import as.leap.LASACL;
 import as.leap.LASConfig;
-import as.leap.TestUtils;
 
 public class App extends Application {
 
