@@ -1,14 +1,15 @@
 # LAS-Sample-PostList-Android
 
-## 简介
+## Overview
 
-PostList 是 LAS SDK 的一个 Sample，该项目依赖于 LAS 的基础模块。通过该应用你可以学习和了解基于 LAS SDK 的权限管理和用户登录等基本操作。
+PostList is a sample of LAS SDK, and it relies on the basic module of LAS. This app shows the permission management and login operation based on LAS SDK. 
 
-## 效果
+
+## Effect
 
 ![capture](capture/postlist.gif)
 
-## 使用
+## How to Use
 
-1. 打开 Android Studio 或 IDEA ，点击菜单项 `File -> Open ` 选择 `setting.gradle` 文件导入工程
-2. 打开 `App.java` 文件，使用你自己的 `APP Id` 和 `API KEY` 替换该文件中已定义的同名常量。
+1. Open Android Studio or IDEA, click `File -> Open `, select and import `setting.gradle`.
+2. Open `App.java` and replace the defined constants with your own `APP Id` and `API KEY`.
