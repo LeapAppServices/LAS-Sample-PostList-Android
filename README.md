@@ -1,8 +1,8 @@
-# LAS-Sample-PostList-Android
+# LeapCloud-Sample-PostList-Android
 
 ## Overview
 
-PostList is a sample of LAS SDK, and it relies on the basic module of LAS. This app shows the permission management and login operation based on LAS SDK. 
+PostList is a sample of LeapCloud SDK, and it relies on the basic module of LeapCloud. This app shows the permission management and login operation based on LeapCloud SDK.
 
 
 ## Effect
