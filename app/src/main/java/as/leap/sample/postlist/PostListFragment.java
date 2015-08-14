@@ -12,15 +12,15 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import as.leap.LASAnonymousUtils;
-import as.leap.LASLog;
-import as.leap.LASObject;
-import as.leap.LASQuery;
-import as.leap.LASQueryManager;
-import as.leap.LASUser;
-import as.leap.callback.FindCallback;
-import as.leap.callback.LogInCallback;
-import as.leap.exception.LASException;
+import as.leap.FindCallback;
+import as.leap.LCAnonymousUtils;
+import as.leap.LCLog;
+import as.leap.LCObject;
+import as.leap.LCQuery;
+import as.leap.LCQueryManager;
+import as.leap.LCUser;
+import as.leap.LogInCallback;
+import as.leap.exception.LCException;
 
 public class PostListFragment extends ListFragment {
 
@@ -46,16 +46,17 @@ public class PostListFragment extends ListFragment {
         setListAdapter(adapter);
         setListShown(false);
 
-        LASUser user = LASUser.getCurrentUser();
+        LCUser user = LCUser.getCurrentUser();
         if (user == null) {
-            LASAnonymousUtils.loginInBackground(new LogInCallback<LASUser>() {
+            LCAnonymousUtils.loginInBackground(new LogInCallback<LCUser>() {
 
                 @Override
-                public void done(LASUser use, LASException e) {
+                public void done(LCUser use, LCException e) {
                     if (e == null) {
-                        LASLog.d(TAG, "finish signing up");
+                        LCLog.d(TAG, "finish signing up");
                         updatePostList();
                     } else {
+                        setListShown(true);
                         setEmptyText(e.getMessage());
                         e.printStackTrace();
                     }
@@ -70,20 +71,20 @@ public class PostListFragment extends ListFragment {
     public void updatePostList() {
         setListShown(false);
         // Create query for objects of type "Post"
-        LASQuery<LASObject> query = LASQuery.getQuery("Post");
+        LCQuery<LCObject> query = LCQuery.getQuery("Post");
 
         // Restrict to cases where the author is the current user.
-        // Note that you should pass in a LASUser and not the
+        // Note that you should pass in a LCUser and not the
         // String reperesentation of that user
-        query.whereEqualTo("author", LASUser.getCurrentUser());
+        query.whereEqualTo("author", LCUser.getCurrentUser());
         // Run the query
-        LASQueryManager.findAllInBackground(query,
-                new FindCallback<LASObject>() {
+        LCQueryManager.findAllInBackground(query,
+                new FindCallback<LCObject>() {
 
                     @SuppressWarnings("unchecked")
                     @Override
-                    public void done(List<LASObject> objects,
-                                     LASException e) {
+                    public void done(List<LCObject> objects,
+                                     LCException e) {
                         if (getActivity() == null || getActivity().isFinishing()) {
                             return;
                         }
@@ -91,14 +92,14 @@ public class PostListFragment extends ListFragment {
 
                         if (e == null) {
                             posts.clear();
-                            for (LASObject post : objects) {
+                            for (LCObject post : objects) {
                                 posts.add(post.getString("textContent"));
                             }
                             ((ArrayAdapter<String>) getListAdapter())
                                     .notifyDataSetChanged();
                         } else {
                             setEmptyText(getString(R.string.empty_list_view));
-                            LASLog.e(TAG, e.getMessage());
+                            LCLog.e(TAG, e.getMessage());
                         }
                     }
 

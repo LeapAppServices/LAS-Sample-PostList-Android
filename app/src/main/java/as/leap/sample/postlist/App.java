@@ -2,8 +2,8 @@ package as.leap.sample.postlist;
 
 import android.app.Application;
 
-import as.leap.LASACL;
-import as.leap.LASConfig;
+import as.leap.LCACL;
+import as.leap.LeapCloud;
 
 public class App extends Application {
 
@@ -16,21 +16,21 @@ public class App extends Application {
 
         if (APP_ID.startsWith("Replace") || API_KEY.startsWith("Replace")) {
             throw new IllegalArgumentException("Please replace with your app id and api key first before" +
-                    "using LAS SDK.");
+                    "using LeapCloud SDK.");
         }
 
         /*
-         * Fill in this section with your LAS credentials
+         * Fill in this section with your LeapCloud credentials
 		 */
-        LASConfig.setLogLevel(LASConfig.LOG_LEVEL_VERBOSE);
-        LASConfig.initialize(this, APP_ID, API_KEY);
+        LeapCloud.setLogLevel(LeapCloud.LOG_LEVEL_VERBOSE);
+        LeapCloud.initialize(this, APP_ID, API_KEY);
 
-        LASACL defaultACL = new LASACL();
+        LCACL defaultACL = new LCACL();
 
         // If you would like all objects to be private by default, remove this
         // line.
         defaultACL.setPublicReadAccess(true);
-        LASACL.setDefaultACL(defaultACL, true);
+        LCACL.setDefaultACL(defaultACL, true);
     }
 
 }

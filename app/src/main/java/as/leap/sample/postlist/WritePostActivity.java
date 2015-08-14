@@ -1,20 +1,18 @@
 package as.leap.sample.postlist;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import as.leap.LASDataManager;
-import as.leap.LASObject;
-import as.leap.LASUser;
-import as.leap.callback.SaveCallback;
-import as.leap.exception.LASException;
+import as.leap.LCDataManager;
+import as.leap.LCObject;
+import as.leap.LCUser;
+import as.leap.SaveCallback;
+import as.leap.exception.LCException;
 
 public class WritePostActivity extends AppCompatActivity {
 
@@ -32,21 +30,21 @@ public class WritePostActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // When the user clicks "Save," upload the post to LAS
+                // When the user clicks "Save," upload the post to LC
                 // Create the Post object
-                LASObject post = new LASObject("Post");
+                LCObject post = new LCObject("Post");
                 post.put("textContent", mPostContentTextView.getText().toString());
 
                 // Create an author relationship with the current user
-                post.put("author", LASUser.getCurrentUser());
+                post.put("author", LCUser.getCurrentUser());
 
                 WritePostActivity.this.mProgressDialog = ProgressDialog.show(
                         WritePostActivity.this, "", "Loading...", true);
                 // Save the post and return
-                LASDataManager.saveInBackground(post, new SaveCallback() {
+                LCDataManager.saveInBackground(post, new SaveCallback() {
 
                     @Override
-                    public void done(LASException exception) {
+                    public void done(LCException exception) {
                         if (exception == null) {
                             WritePostActivity.this.mProgressDialog.dismiss();
                             setResult(RESULT_OK);
