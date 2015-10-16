@@ -1,8 +1,8 @@
-# LeapCloud-Sample-PostList-Android
+# MaxLeap-Sample-PostList-Android
 
 ## 简介
 
-PostList 是 LeapCloud SDK 的一个 Sample，该项目依赖于 LeapCloud 的基础模块。通过该应用你可以学习和了解基于 LeapCloud SDK 的权限管理和用户登录等基本操作。
+PostList 是 MaxLeap SDK 的一个 Sample，该项目依赖于 MaxLeap 的基础模块。通过该应用你可以学习和了解基于 MaxLeap SDK 的权限管理和用户登录等基本操作。
 
 ## 效果
 

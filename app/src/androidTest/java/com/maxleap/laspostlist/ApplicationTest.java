@@ -1,4 +1,4 @@
-package as.leap.laspostlist;
+package com.maxleap.laspostlist;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

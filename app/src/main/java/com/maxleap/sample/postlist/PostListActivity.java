@@ -1,4 +1,4 @@
-package as.leap.sample.postlist;
+package com.maxleap.sample.postlist;
 
 import android.support.v4.app.Fragment;
 

@@ -1,4 +1,4 @@
-package as.leap.sample.postlist;
+package com.maxleap.sample.postlist;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -8,11 +8,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import as.leap.LCDataManager;
-import as.leap.LCObject;
-import as.leap.LCUser;
-import as.leap.SaveCallback;
-import as.leap.exception.LCException;
+import com.maxleap.MLDataManager;
+import com.maxleap.MLObject;
+import com.maxleap.MLUser;
+import com.maxleap.SaveCallback;
+import com.maxleap.exception.MLException;
 
 public class WritePostActivity extends AppCompatActivity {
 
@@ -30,21 +30,21 @@ public class WritePostActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // When the user clicks "Save," upload the post to LC
+                // When the user clicks "Save," upload the post to ML
                 // Create the Post object
-                LCObject post = new LCObject("Post");
+                MLObject post = new MLObject("Post");
                 post.put("textContent", mPostContentTextView.getText().toString());
 
                 // Create an author relationship with the current user
-                post.put("author", LCUser.getCurrentUser());
+                post.put("author", MLUser.getCurrentUser());
 
                 WritePostActivity.this.mProgressDialog = ProgressDialog.show(
                         WritePostActivity.this, "", "Loading...", true);
                 // Save the post and return
-                LCDataManager.saveInBackground(post, new SaveCallback() {
+                MLDataManager.saveInBackground(post, new SaveCallback() {
 
                     @Override
-                    public void done(LCException exception) {
+                    public void done(MLException exception) {
                         if (exception == null) {
                             WritePostActivity.this.mProgressDialog.dismiss();
                             setResult(RESULT_OK);

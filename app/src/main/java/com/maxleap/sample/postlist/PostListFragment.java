@@ -1,4 +1,4 @@
-package as.leap.sample.postlist;
+package com.maxleap.sample.postlist;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,18 +9,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
+import com.maxleap.FindCallback;
+import com.maxleap.LogInCallback;
+import com.maxleap.MLAnonymousUtils;
+import com.maxleap.MLLog;
+import com.maxleap.MLObject;
+import com.maxleap.MLQuery;
+import com.maxleap.MLQueryManager;
+import com.maxleap.MLUser;
+import com.maxleap.exception.MLException;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import as.leap.FindCallback;
-import as.leap.LCAnonymousUtils;
-import as.leap.LCLog;
-import as.leap.LCObject;
-import as.leap.LCQuery;
-import as.leap.LCQueryManager;
-import as.leap.LCUser;
-import as.leap.LogInCallback;
-import as.leap.exception.LCException;
 
 public class PostListFragment extends ListFragment {
 
@@ -46,14 +46,14 @@ public class PostListFragment extends ListFragment {
         setListAdapter(adapter);
         setListShown(false);
 
-        LCUser user = LCUser.getCurrentUser();
+        MLUser user = MLUser.getCurrentUser();
         if (user == null) {
-            LCAnonymousUtils.loginInBackground(new LogInCallback<LCUser>() {
+            MLAnonymousUtils.loginInBackground(new LogInCallback<MLUser>() {
 
                 @Override
-                public void done(LCUser use, LCException e) {
+                public void done(MLUser use, MLException e) {
                     if (e == null) {
-                        LCLog.d(TAG, "finish signing up");
+                        MLLog.d(TAG, "finish signing up");
                         updatePostList();
                     } else {
                         setListShown(true);
@@ -71,20 +71,20 @@ public class PostListFragment extends ListFragment {
     public void updatePostList() {
         setListShown(false);
         // Create query for objects of type "Post"
-        LCQuery<LCObject> query = LCQuery.getQuery("Post");
+        MLQuery<MLObject> query = MLQuery.getQuery("Post");
 
         // Restrict to cases where the author is the current user.
-        // Note that you should pass in a LCUser and not the
+        // Note that you should pass in a MLUser and not the
         // String reperesentation of that user
-        query.whereEqualTo("author", LCUser.getCurrentUser());
+        query.whereEqualTo("author", MLUser.getCurrentUser());
         // Run the query
-        LCQueryManager.findAllInBackground(query,
-                new FindCallback<LCObject>() {
+        MLQueryManager.findAllInBackground(query,
+                new FindCallback<MLObject>() {
 
                     @SuppressWarnings("unchecked")
                     @Override
-                    public void done(List<LCObject> objects,
-                                     LCException e) {
+                    public void done(List<MLObject> objects,
+                                     MLException e) {
                         if (getActivity() == null || getActivity().isFinishing()) {
                             return;
                         }
@@ -92,14 +92,14 @@ public class PostListFragment extends ListFragment {
 
                         if (e == null) {
                             posts.clear();
-                            for (LCObject post : objects) {
+                            for (MLObject post : objects) {
                                 posts.add(post.getString("textContent"));
                             }
                             ((ArrayAdapter<String>) getListAdapter())
                                     .notifyDataSetChanged();
                         } else {
                             setEmptyText(getString(R.string.empty_list_view));
-                            LCLog.e(TAG, e.getMessage());
+                            MLLog.e(TAG, e.getMessage());
                         }
                     }
 
